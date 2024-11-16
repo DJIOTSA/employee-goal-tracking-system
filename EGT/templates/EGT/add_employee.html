@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <title>EGT: welcome to {{ enterprise_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
+<body class="container">
+<section >
+<h1 class="text-primary  text-center display-2">Employee Goal Tracker</h1>
+<h3 class=" h3 text-info text-capitalize text-center">Your registration as an employee at {{ enterprise_name }} was successful.</h3>
+<p class="text-center display-5 text-warning mt-5"> Congratulation!!!</p>
+
+<hr class="m-5">
+
+<table class="table">
+    <h3 class="display-5 text-info text-justify text-capitalize mb-4">Your enterprise informations:</h3>
+    <p class="text-justify"><strong class="text-danger text-lead">The following informations are strictly personal and should not shared with anyone.</strong></p>
+    <tr>
+        <th class="text-left text-uppercase text-primary ">email</th>
+        <td class="text-lowercase text-primary ">{{ email }}</td>
+    </tr>
+    <tr>
+        <th class="text-left text-uppercase text-primary">matriculation number</th>
+        <td class="text-uppercase text-primary">{{ user_code }}</td>
+    </tr>
+    <tr>
+        <th class="text-left text-uppercase text-primary">password</th>
+        <td class="text-primary">{{ password }}</td>
+    </tr>
+</table>
+
+
+</section>
+</body>
+</html>

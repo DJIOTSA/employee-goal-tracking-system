@@ -1,0 +1,3 @@
+Your Are No Longer The CEO Of {{ enterprise_name }}
+
+Thank You For Your Cooperation!

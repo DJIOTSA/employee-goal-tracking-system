@@ -1,0 +1,4 @@
+Confirm Your Registration at {{ enterprise_name }}
+
+Verify your email address by clicking on this button
+    http://127.0.0.1:8000/EGT/signupverify2.html/?code={{ code }}

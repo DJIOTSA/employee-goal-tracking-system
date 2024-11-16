@@ -1,0 +1,3 @@
+Your Are No Longer An EMPLOYEE Of {{ enterprise_name }}
+
+Your enterprise matriculation number of {{ enterprise_name}} is deactivated.

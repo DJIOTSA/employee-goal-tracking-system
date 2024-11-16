@@ -1,0 +1,5 @@
+Employee Goal Tracker
+
+our registration as employee at {{ enterprise_name }} was successful.
+
+Congratulation!!!
