@@ -1,0 +1,137 @@
+EVERY CAPITAL ACTION DONE BY AN EMPLOYEE ADMIN IS ADDED SENT TO THE ADMINISTRATOR
+---------------------------------------------------------------------------------
+
+
+Queryset Filtering: The users queryset is filtered efficiently using exclude to exclude users already in instance.goal.users_in_charge, avoiding redundant list comprehension and in checks.
+
+Bulk Addition: The users_in_charge.add(*users) method leverages bulk addition for multiple users at once, improving efficiency.
+
+Early Exit: The if users condition prevents unnecessary database operations if there are no new users to add.
+
+Conciseness: The code is more concise and readable due to the direct queryset filtering and removal of redundant list comprehension.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+COMPLETION BONUS AND TARGET STATUS
+
+CRITERIA ON WHAT WE ARE GOING TO ASSIGN A BONUS COMPLETION TO A USER:
+1- The user must be the one responsible for the completion of the target
+2- The target report must be submit between the given time
+3- The target report rate must be amount [100, 200, 300, 400, 500]
+4- The target completion bonus status must not be ACCEPTED, PENDING OR PAID
+
+CONDITION TO REJECT A TARGET COMPLETION
+1- The user is not responsible for of the target
+2- The target report is submit after the dateline [when ever this is verified the completion bonus is rejected]
+3- The target report rate must be 0 or Null [ if condition 2 is false and 3 is true]
+
+IMPLEMENTATION CRITERIA
+
+The double verification will be made: at the level of the target and the report to ensure that the completion bonus is assigned
+to a user that have the merit to be rewarded
+
+Factors at the level of the target: 
+- is_done: to check wether the target report is submit or not and also to check the target completion status
+  (Then the use of a boolean is not enough, here we are going to use an integer flag with two value: SUBMIT AND COMPLETED)
+- status: to check the completion bonus status:  REJECTED, ACCEPTED, PAID, PENDING
+
+    For activities with multiple users:
+    - submit_employees: to check if the users have submit their reports
+    - sold_to: to check completion bonus status for PAID
+    (The remaining completion bonus status [REJECTED, ACCEPTED, PENDING] will be set at the level of the report)
+
+
+Factors at the level of the target report
+- submit_late: to check if the target was done during the required time
+- The rate: to evaluate the report and check if the target completion.
+  (A target is_done status will set as completed if and only if the rate is different than 0 and None )
+- status: To check if the completion bonus
+
+
+REPORT RATE REVIEW AND COMPLETION BONUS MANAGEMENT
+
+CONDITIONS TO DEDUCT THE COMPLETION BONUS FROM THE USER COMPLETION BONUS ACCOUNT
+1- The user must have been credited or paid the amount of the target completion bonus (The target completion bonus can't be changed if at least one responsible of the target initiate a payment on that target)
+2- The updated rate must be 0 but the submit_late status will remain false (Since the error is coming from the administration)
+3- And the administrator can decide to mark the target as not done if there is a necessity
+
+MODULES THAT WILL BE AFFECTED
+- PAYROLL 
+- TASKS 
+- PERFORMANCE
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+REPORT REPEAT FUNCTIONALITY
+
+For goals and activities with single user 
+- REPEAT to specify how come the target is going to be repeated: DAILY, WEEKLY, AND MONTHLY
+
+
+Factors of verification at the level of the target
+-repeat : specify the period of repetition and the repetition status [no for non-repeat task](
+    if the repeat period is change then the repeat_number will be initialize to 1 and you can only trace the previous
+    target using the previous report date of submission of the repeat and repeat_num fields of the report)
+    
+-repeat_number: specify the current repetition repeat_number: 
+
+
+Factors a t the level of the level of the report
+-repeat_num: store the target repetition number (note that if the user have missed a target repeat, repeat_number will be set to the 
+  missed target repeat number so far as the repeat period is the same)
+
+
+MODULES THAT WILL BE AFFECTED:
+-TASKS
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+NOTIFICATION: delete notification after seen 
+
+In what situation are we going to send a NOTIFICATION according to modules:
+
+    TASK
+    - when a task is created
+    - a report is submit
+    - a report period change
+    - a report rating occur 
+    - a report update occur 
+    - a report repeat change
+    - a completion bonus is deducted
+
+    PAYROLL 
+    - a completion bonus is credited
+    - a transaction is requested
+    - a transaction is completed
+
+    PERFORMANCE 
+    - When a user expectation PERFORMANCE period end
+
+    CHAT
+    - When a message is send
+    
+    EGT 
+    - when user is set as admin
+    - when user is remove admin
+    - when user is deactivated from an enterprise (or send an email)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+CHAT 
+- enterprise group discussion
+- goal group discussion
+- broadcast message from Administrator or Employee administrator
+- And normal communication between the target creator and it's user 
+(for activities with multiple users, the administrator receive all the messages of employees in one discussion while
+employee receive a single only message of the administrator )
+
+
+
+
+/??????????????????????????????????????????????????????????????????????????
+for future work we will generate task record to keep track of all operation perform by users on activities and goals
+
+
+-message, threat, threat message
+
+For single threat, allow only communication between the administrator and the employee and use the name
+For group
