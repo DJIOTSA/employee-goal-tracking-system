@@ -1,23 +1,3 @@
-   
-
-email	                            mhulodjiotsa@gmail.com
-matriculation number	            EMOER24E1       EGT24E1
-password	                        GGUT7d0c
-
-
-email	                            malabarmhulo@gmail.com
-matriculation number                EMOER24E2
-password		                    XQLblYWa
-
-
-email	                            malabarmhulo2@gmail.com
-matriculation number	            EGT24E2         EMOER24E3
-password	                        LK7MYGpU
-
-
-
-    DO EVERY THINGS TO AVOID REDUNDANCE OF DATA
-    *******************************************
 
 ###########################################################################################################################
 TASK ACTIVITY FOR MULTIPLE USER AND REPEAT FUNCTIONALITY
